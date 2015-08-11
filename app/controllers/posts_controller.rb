@@ -1,27 +1,27 @@
 class PostsController < ApplicationController
-	before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update]
 
   def index
-  	@posts = Post.all
+    @posts = Post.all
   end
 
   def show
   end
 
   def new
-  	@post = Post.new
+    @post = Post.new
   end
 
   def create
-  	@post = Post.new(post_params)
+    @post = Post.new(post_params)
     @post.creator = User.first # TODO: Change once we have authentication
 
-  	if @post.save
-  		flash['notice'] = "Your post was created."
-  		redirect_to post_path(@post)
-  	else #validation error
-  		render :new
-  	end
+    if @post.save
+      flash['notice'] = "Your post was created."
+      redirect_to post_path(@post)
+    else #validation error
+      render :new
+    end
 
   end
 
@@ -30,22 +30,22 @@ class PostsController < ApplicationController
 
   def update
 
-  	if @post.update(post_params)
-  		flash['notice'] = 'The post was updated.'
-  		redirect_to post_path(@post)
-  	else
-  		render :edit
-  	end
+    if @post.update(post_params)
+      flash['notice'] = 'The post was updated.'
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
 
   end
 
   private
 
   def post_params
-  	params.require(:post).permit(:title, :url, :description)
+    params.require(:post).permit(:title, :url, :description)
   end
 end
 
-	def set_post
-		@post = Post.find(params[:id])
-	end
+  def set_post
+    @post = Post.find(params[:id])
+  end

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-	def create
-		binding.pry
-	end
+  def create
+    binding.pry
+  end
   
