@@ -1,0 +1,18 @@
+<div class='well'>
+  <%= render 'shared/validation_errors', obj: @user %>
+  <%= form_for @user do |f| %>
+    <div class='control-group'>
+      <%= f.label :username, "User Name" %>
+      <%= f.text_field :username %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :time_zone, "Time Zone" %>
+      <%= f.time_zone_select :time_zone %>
+    </div>
+    <%= f.submit(@user.new_record? ? 'Create User' : 'Update User', class: 'btn btn-primary') %>
+  <% end %>
+</div>
