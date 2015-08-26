@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, uniqueness: true
-!
+
   before_save :generate_slug!
 
   def generate_slug!
