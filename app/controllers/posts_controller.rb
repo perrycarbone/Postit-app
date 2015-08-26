@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :vote]
+  before_action :set_post, only: [:show, :edit, :update, :vote, :destroy]
   before_action :require_user, except: [:show, :index]
 
   def index
@@ -42,13 +42,22 @@ class PostsController < ApplicationController
   def vote
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
 
-    if @vote.valid?
-      flash['notice'] = "Your vote was counted."
-    else
-      flash['error'] = "You can only vote on a post once."
+    respond_to do |format|
+      format.html do
+        if @vote.valid?
+          flash['notice'] = "Your vote was counted."
+        else
+          flash['error'] = "You can only vote on a post once."
+        end
+        redirect_to :back
+      end
+      format.js
     end
+  end
 
-    redirect_to :back
+  def destroy
+    @post.destroy
+    redirect_to root_path
   end
 
   private
@@ -58,7 +67,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(slug: params[:id])
   end
 
 end

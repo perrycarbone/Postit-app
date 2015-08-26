@@ -16,3 +16,10 @@
 //= require_tree .
 //= require bootstrap
 
+// Unobstrusive javascript approach for Ajax
+// $(document).ready(function() {
+//   $("a_vote_link").click(function(0 {
+//     $.ajax(type: 'post', url: 'some_url').done
+//   }))
+// })
+
