@@ -75,3 +75,4 @@ class PostsController < ApplicationController
     access_denied unless logged_in? and (current_user == @post.creator || current_user.admin?)
   end
 end
+
